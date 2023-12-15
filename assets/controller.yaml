@@ -1,4 +1,4 @@
-kind: Deployment
+mkind: Deployment
 apiVersion: apps/v1
 metadata:
   name: gcp-filestore-csi-driver-controller
@@ -52,6 +52,8 @@ spec:
             - --v=${LOG_LEVEL}
             - --nodeid=$(KUBE_NODE_NAME)
             - --controller=true
+            - --enable-multishare=true
+            - --gke-cluster-name=${CLUSTER_ID}
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: "/etc/cloud-sa/service_account.json"
